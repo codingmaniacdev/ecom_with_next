@@ -23,7 +23,7 @@ const Menu = ({ showCatMenu, setShowCatMenu }) => {
         <React.Fragment key={item.id}>
           {
             !!item?.subMenu ? (
-              <li className='cursor-pointer flex items-center gap-2 relative text-sm'
+              <li className="cursor-pointer flex items-center gap-2 relative text-sm"
                 onMouseEnter={() => setShowCatMenu(true)}
                 onMouseLeave={() => setShowCatMenu(false)}
               >
