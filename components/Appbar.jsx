@@ -41,7 +41,7 @@ const Appbar = () => {
   }, [lastScrollY]);
 
   return (
-    <header className={`w-full h-[50px] md:h-[50px] bg-white flex justify-between items-center z-20 sticky top-0 transition-transform duration-300 ${show} shadow-sm`}>
+    <header className={`w-full h-[80px] md:h-[80px] bg-white flex justify-between items-center z-20 sticky top-0 transition-transform duration-300 ${show} shadow-sm`}>
       <Wrapper className={`h-[50px] flex justify-between items-center`}>
         <Link href={`/`}>
           <Image src={logo} className={`w-[40px] md:w-[60px]`} alt="..." />
