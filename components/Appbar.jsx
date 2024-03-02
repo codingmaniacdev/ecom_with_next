@@ -11,6 +11,7 @@ import { BsCart3, BsHeart } from "react-icons/bs";
 import { VscChromeClose } from "react-icons/vsc";
 import { BiMenuAltRight } from "react-icons/bi";
 import MobileMenu from "./MobileMenu";
+import { fetcher } from "@/utils/api";
 
 const Appbar = () => {
 
@@ -18,6 +19,7 @@ const Appbar = () => {
   const [showCatMenu, setShowCatMenu] = useState(false);
   const [show, setShow] = useState("translate-y-0");
   const [lastScrollY, setLastScrollY] = useState(0);
+  const [category, setCategory] = useState();
 
   const controlNavbar = () => {
     if (window.scrollY > 200) {
@@ -33,12 +35,19 @@ const Appbar = () => {
   }
 
   useEffect(() => {
+    fetchCategory();
     window.addEventListener("scroll", controlNavbar);
 
     return () => {
       window.removeEventListener("scroll", controlNavbar);
     };
   }, [lastScrollY]);
+
+  const fetchCategory = async () => {
+    const { data } = await fetcher("/api/categories?populate=*");
+    setCategory(data);
+    console.log("cat ==>", data);
+  }
 
   return (
     <header className={`w-full h-[80px] md:h-[80px] bg-white flex justify-between items-center z-20 sticky top-0 transition-transform duration-300 ${show} shadow-sm`}>
@@ -47,9 +56,9 @@ const Appbar = () => {
           <Image src={logo} className={`w-[40px] md:w-[60px]`} alt="..." />
         </Link>
 
-        <Menu showCatMenu={showCatMenu} setShowCatMenu={setShowCatMenu} />
+        <Menu showCatMenu={showCatMenu} setShowCatMenu={setShowCatMenu} category={category} />
         {mobileMenu && (
-          <MobileMenu showCatMenu={showCatMenu} setShowCatMenu={setShowCatMenu} setMobileMenu={setMobileMenu} />
+          <MobileMenu showCatMenu={showCatMenu} setShowCatMenu={setShowCatMenu} setMobileMenu={setMobileMenu} category={category} />
         )}
 
 
